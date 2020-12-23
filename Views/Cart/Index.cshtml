@@ -1,0 +1,118 @@
+﻿@model List<BookShop.Models.DTO.CartItem>
+@{
+    ViewBag.Title = "Giỏ hàng của bạn";
+    Layout = "~/Views/Shared/LayoutDetail.cshtml";
+    var sum = new long();
+    bool check = true;
+}
+
+@section cartSection{
+    <script src="/Assets/Client/js/Controller/CartController.js"></script>
+}
+
+<h2 class="text-center">Giỏ hàng của bạn</h2>
+<div class="container">
+
+    @if (Model.Count > 0)
+    {
+
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Tên sản phẩm</th>
+                    <th style="width:10%">Giá</th>
+                    <th style="width:8%">Số lượng</th>
+                    <th style="width:22%" class="text-center">Thành tiền</th>
+                    <th style="width:10%"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-2 hidden-xs">
+                                    <img src="@item.Book.Image" alt="@item.Book.Name" class="img-responsive" width="100">
+                                </div>
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">@item.Book.Name</h4>
+                                    <p>@item.Book.Author</p>
+                                    @if (item.actual_number == 0)
+                                    {
+                                        <p style="color:red">Sách đã hết hàng</p>
+                                        check = false;
+                                    }
+                                    else if (item.actual_number < 5)
+                                    {
+                                        <p style="color:blue">Còn @item.actual_number quyển</p>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price">@item.Book.Price.Value.ToString("N0") ₫</td>
+                        <td data-th="Quantity">
+                            <div class="form-control text-center">
+                                <input class="txtQuantity" value="@item.Quantity" type="number" data-id="@item.Book.ID">
+                            </div>
+                        </td>
+                        <td data-th="Subtotal" class="text-center">@((item.Book.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) ₫</td>
+                        <td class="actions" data-th="">
+                            <div class="btn-Edit" title="Sửa số lượng">
+                                <a class="btn btn-info btn-sm">
+                                    <i class="fa fa-edit"></i>@*button sửa sản phẩm*@
+                                </a>
+                            </div>
+
+                            <div class="btn-Delete" title="Xóa sản phẩm" data-id="@item.Book.ID">
+                                <a class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash-o"></i>@*button xóa sản phẩm*@
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    sum += (long)(item.Book.Price.GetValueOrDefault(0) * item.Quantity);
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+
+                    <td>
+                        <a class="btn btn-success" id="btnDeleteAll"><i class="fa fa-times" style="color:#ffd800; margin-right:2px;"></i>Xóa giỏ hàng</a>
+                    </td>
+
+                    <td>
+                        <a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                    </td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center">
+                        <strong>Tổng tiền: @sum.ToString("N0") ₫  </strong>
+                    </td>
+
+                    @if (check == true)
+                    {
+                        <td>
+                            <a href="/Cart/Payment" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
+                        </td>
+                    }
+
+                </tr>
+            </tfoot>
+        </table>
+    }
+    else
+    {
+        <tfoot style="margin-left:300px;">
+            <tr>
+                <td>
+                    <a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                </td>
+            </tr>
+        </tfoot>
+        <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+    }
+
+
+</div>
+

@@ -1,0 +1,201 @@
+﻿body {
+}
+
+.pathway {
+    height: 25px;
+    width: 100%;
+    margin: 0 auto 0 auto;
+    padding: 0;
+    display: block;
+    color: #999999;
+    line-height: 25px;
+}
+
+.pathway ul {
+    line-height: 29px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pathway ul li {
+    font-size: 13px;
+    float: left;
+    padding: 0 5px 0 0;
+    position: relative;
+    z-index: 8;
+    margin-top: 5px;
+    white-space: nowrap;
+}
+
+.pathway ul li a {
+    color: #00cc66;
+    padding: 0 10px 0 0;
+    text-decoration: none;
+    background: url(/Assets/Client/images/orange-arrow-r.png) no-repeat right 2px;
+}
+
+#layoutGroup1 .block {
+    margin-bottom: 2em;
+}
+
+#layoutGroup1 .block h1, #layoutGroup4 .block h1 {
+    margin: 0px auto;
+    overflow: hidden;
+    clear: both;
+    padding: 7px 0px 5px 0;
+    clear: both;
+    font-size: 22px;
+    color: #303030;
+    margin-top: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #eeeeee;
+}
+
+#layoutGroup1 .block h1 span {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+#module_Login a, #module_Register a, #module_forgotPassword a {
+    color: #00cc66;
+}
+
+#layoutGroup1 .block .blockcontent {
+    padding: 8px 0;
+}
+
+#layoutGroup1 .loginsocial {
+    width: 30%;
+    float: left;
+    background: #fff url(/Assets/Client/images/bg_h.png) right 69px no-repeat;
+    margin-right: 2%;
+}
+
+h3 {
+    padding: 5px 0;
+    font-weight: normal;
+    font-size: 18px;
+    color: #303030;
+    margin: 20px 0px 20px 0;
+}
+
+.buttom {
+    margin: 0;
+    padding: 0;
+}
+
+.buttom div {
+    margin: 10px 0;
+    padding: 0;
+}
+
+.buttom a.btn_face {
+    display: block;
+    width: 195px;
+    height: 42px;
+    background: #fff url(/Assets/Client/images/login_btn.png) top left no-repeat;
+}
+
+.buttom a.btn_google {
+    display: block;
+    width: 195px;
+    height: 42px;
+    background: #fff url(../images/login_btn.png) left -52px no-repeat;
+}
+
+.textlabel {
+    display: block;
+    float: left;
+    text-align: left;
+    padding: 9px 5px 0 0;
+    width: 150px;
+    font-size: 14px;
+    color: #414141;
+}
+
+label {
+    cursor: pointer;
+}
+
+.Required {
+    color: #FF0000;
+}
+
+.field {
+    display: block;    
+    width: 100%;
+    overflow: hidden;
+    padding:7px 0 0 0 ;
+}
+
+.field input[type=text], .field input[type=password] {
+    font-size: 13px;
+    border: 1px solid #D8D3D0;
+    border-radius: 2px 2px 2px 2px;
+    margin: 0;
+    color: #858585;
+    height: 40px;
+    padding: 10px;
+    width: 280px;
+}
+
+.help {
+    padding-left: 10px;
+    font-size: 11px;
+    color: #808080;
+}
+
+
+.loginbuton {
+    display: block;
+    float: left;
+    background: #347091;
+    border: 1px solid #D8D3D0;
+    color: #fff;
+    padding: 8px 30px 8px 30px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.link_register {
+    color: #38b04a;
+    font-size: 16px;
+    font-style: italic;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.loginform{
+    float:left;
+    width:70%;
+    margin-left:350px;
+    margin-top:-50px;
+}
+
+.registerform{
+     float:left;
+    width:70%;
+    margin-left:350px;
+    margin-top:-50px;
+}
+
+.field select {
+    border: 1px solid #D8D3D0;
+    border-radius: 2px 2px 2px 2px;
+    margin: 0;
+    color: #858585;
+    padding: 9px;
+    height: 40px;
+    line-height: 35px !important;
+    -webkit-appearance: menulist-button !important;
+    width: 280px;
+}
+
+.Field50 {
+    width: 91px !important;
+}

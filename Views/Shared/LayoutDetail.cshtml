@@ -1,0 +1,330 @@
+﻿@{
+    var session = (BookShop.Models.EF.User)Session[BookShop.Controllers.LoginController.userSession];
+}
+@model List<BookShop.Models.DTO.CartItem>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- BOOTSTRAP CSS -->
+    <link href="/Assets/Client/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Assets/Client/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link href="~/Assets/Client/css/Notify/BrightTheme.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotify.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotifyBootstrap3.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotifyConfirm.css" rel="stylesheet" />
+    <script src="~/Assets/Client/js/Notify/PNotify.js"></script>
+    <script src="~/Assets/Client/js/Notify/PNotifyBootstrap3.js"></script>
+    <script src="~/Assets/Client/js/Notify/PNotifyConfirm.js"></script>
+
+    <!-- AWESOME ICON FONT -->
+    <link href="/Assets/Client/lib/awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!-- IMPORT FONT GOOGLE LINK -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,700,300&amp;subset=vietnamese,latin,latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--Style payment-->
+    <link href="/Assets/Client/Payment/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="/Assets/Client/Payment/css/creditly.css" type="text/css" media="all" />
+
+    <script src="~/Assets/Client/js/Notify/PNotify.js"></script>
+    <script src="~/Assets/Client/js/Notify/PNotifyBootstrap3.js"></script>
+    <script src="~/Assets/Client/js/Notify/PNotifyConfirm.js"></script>
+    <link href="~/Assets/Client/css/Notify/BrightTheme.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotify.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotifyBootstrap3.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotifyConfirm.css" rel="stylesheet" />
+
+    <link href="/Assets/Client/css/Detail.css" rel="stylesheet" />
+    <link href="/Assets/Client/css/Cart.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Login.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/style.css" rel="stylesheet" />
+    <!-- online-fonts payment -->
+    <link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <!--//online-fonts -->
+    <!-- SLIDE CSS -->
+    <link rel="stylesheet" href="/Assets/Client/lib/slider/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/Assets/Client/lib/slider/nivo-slider.css" type="text/css" media="screen" />
+    <!-- Owl Carousel Assets -->
+    <link href="/Assets/Client/lib/owlcarousel/owl.carousel.css" rel="stylesheet">
+    <link href="/Assets/Client/lib/owlcarousel/owl.theme.css" rel="stylesheet">
+
+
+    <!--Script payment-->
+    <script type="application/x-javascript">
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/Assets/Client/js/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="topbar">
+            <div class="container">
+                <div class="col-xs-12 col-sm-6 p0 hotline-top">
+                    <img src="/Assets/Client/images/phone-24.png" alt="hotline" />
+                    <p>Điện thoại: <a href="tel:01649.629.629">01649.629.629</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="header">
+            <div class="container">
+                <div class="col-xs-12 col-md-4">
+                    <div id="logo">
+                        <a href="/"><img src="/Assets/Client/images/Logo2.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div id="search">
+                        <form action="" method="post">
+                            <input type="text" name="txt_search" placeholder="Tìm sách" />
+                            <button type="submit" name="btn_search">Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    @if (session != null)
+                    {
+                        <div class="Login">
+                            <div class="TextLable" title="@session.Name">
+                                <a>
+                                    <span class="glyphicon glyphicon-log-in" style="height:100px;"></span>@session.Name
+                                </a>
+                            </div>
+                            <div class="display-Text" style="height:100px; width:190px;">
+                                <div class="buttom">
+                                    <div>
+                                        <a href="/User/OrderHistory/@session.ID" class="YourCart"  style="margin-left:25px;"><i class="glyphicon glyphicon-calendar"></i>Lịch sử mua hàng</a>
+                                    </div>
+                                    <div>
+                                        <a href="/User/Orders/@session.ID" class="YourCart" style="margin-left:25px;" ><i class="glyphicon glyphicon-shopping-cart"></i>Đơn hàng của bạn</a>
+                                    </div>
+                                    <div>
+                                        <a href="/Dang-xuat" class="YourCart" style="margin-left:25px;"><i class="glyphicon glyphicon-log-out"></i>Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="Login">
+                            <div class="TextLable" title="Đăng nhập">
+                                <a>
+                                    <span class="glyphicon glyphicon-log-in" style="height:100px;"></span>Đăng nhập
+                                </a>
+                            </div>
+                            <div class="display-Text">
+                                <div class="buttom">
+                                    @*<div>
+                                        <a href="Javascript:" class="btn_face" style="margin-left:15px;"></a>
+                                    </div>*@
+                                    <div>
+                                        <a class="btn_login" href="/Dang-nhap" style="margin-left:15px;">Đăng nhập</a>
+                                    </div>
+                                    <div class="loginlink" style="margin-left:15px;">
+                                        Khách hàng mới?
+                                        <a href="/Dang-ky">Tạo tài khoản</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model != null)
+                    {
+                        var sum = new long();
+                        <div class="cart">
+                            <div class="discart">
+                                <span class="mycart">Giỏ hàng:</span>
+                                <span class="count_products_cart">
+                                    @Model.Count Sản phẩm
+                                </span>
+                            </div>
+                            <div class="top-cart-content">
+                                <div class="CartHover">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="small_products">
+                                            <a href="#">
+                                                <div class="image">
+                                                    <img src="@item.Book.Image" title="@item.Book.Name">
+                                                </div>
+                                                <div class="info">
+                                                    <div class="title">@item.Book.Name</div>
+                                                    <div class="Tac-Gia" style="color:#00cc66; font-size:12px; margin:4px 10px; ">@item.Book.Author</div>
+                                                    <div class="prices">@((item.Book.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) ₫</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        sum += (long)(item.Book.Price.GetValueOrDefault(0) * item.Quantity);
+                                    }
+
+                                    <div class="ctotal">
+                                        Tổng tiền: <b>@sum.ToString("N0") ₫ </b>
+                                    </div>
+                                    <div class="buttom" id="showcartlink">
+                                        <a class="cartlink" href="/Cart" title="GIỎ HÀNG CỦA TÔI">
+                                            Xem giỏ hàng
+                                            <i class="fa fa-play"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="cart">
+                            <div class="discart">
+                                <span class="mycart">Giỏ hàng:</span>
+                                <span class="count_products_cart">
+                                    0 sản phẩm
+                                </span>
+                            </div>
+                            <div class="top-cart-content">
+                                <div class="CartHover">
+                                    Bạn chưa có sản phẩm nào trong giỏ hàng
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <nav id="MainMenu" class="hidden-xs hidden-sm ">
+            <div class="container">
+                <div class="hea1c1 menutop20 pos1" id="menutop2">
+
+                    @{ Html.RenderAction("CategoryBook", "Book");}
+                </div>
+
+                <div class="hotline">
+                    <a href="tel:01649.629.629">HOTLINE: 01649.629.629 (từ 8h-22h cả T7,CN)</a>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+    <div class="clear"></div>
+
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide" style="text-align:center;">
+            @TempData["AlertMessage"]
+        </div>
+    }
+    @RenderBody()
+
+
+
+    <footer id="footer">
+        @{Html.RenderAction("Footer", "Home");}
+    </footer>
+    <div class="copyright">
+        <div class="container">
+            <p>Copyright © 2016 <a href="http://themeviet.org/" target="_blank">Themeviet.org</a>. All Rights Reserved.</p>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="/Assets/Client/lib/slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(window).load(function () {
+            $('#slider').nivoSlider();
+        });
+    </script>
+
+    <!-- Owl Carousel Assets -->
+    <script src="/Assets/Client/lib/owlcarousel/owl.carousel.js"></script>
+    @*<script>
+        $(document).ready(function() {
+            $("#slider-tintuc").owlCarousel({
+                autoPlay: 3000,
+                navigation : true,
+                slideSpeed : 300,
+                paginationSpeed : 400,
+                singleItem : true
+            });
+            $("#spmoi").owlCarousel({
+                autoPlay: 3000,
+                // items : 4,
+               //  itemsDesktop : [1199,3],
+               //  itemsDesktopSmall : [979,3],
+               //  itemsMobile : [768,2]
+                itemsCustom : [
+                    [0, 2],
+                    [600, 3],
+                    [1200, 4],
+                ],
+            });
+        });
+        </script>*@
+
+    <script type="text/javascript">
+        // hidden-show children menu
+        $(document).ready(function () {
+            //use event delegation since classes are changed dynamically
+            $('.ulspmobi').on('click', '.iconlist', function () {
+                //remove the show class and assign hidden
+                $(this).toggleClass('iconlist1 iconlist');
+                //the subfield is a child of the parent not the next sibling
+                $(this).siblings('ul.mnboxl_1').show('slow');
+            });
+            $('.ulspmobi').on('click', '.iconlist1', function () {
+                $(this).toggleClass('iconlist1 iconlist');
+                $(this).siblings('ul.mnboxl_1').hide('slow');
+            });
+        });
+    </script>
+
+    <!-- js-scripts-->
+    <script type="text/javascript" src="/Assets/Client/Payment/js/jquery-2.1.4.min.js"></script>
+
+    <!-- credit-card -->
+    <script type="text/javascript" src="/Assets/Client/Payment/js/creditly.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var creditly = Creditly.initialize(
+                '.creditly-wrapper .expiration-month-and-year',
+                '.creditly-wrapper .credit-card-number',
+                '.creditly-wrapper .security-code',
+                '.creditly-wrapper .card-type');
+
+            $(".creditly-card-form .submit").click(function (e) {
+                e.preventDefault();
+                var output = creditly.validate();
+                if (output) {
+                    // Your validated credit card output
+                    console.log(output);
+                }
+            });
+            $('#AlertBox').removeClass('hide');
+            $('#Alertbox').delay(1000).slideUp(1000);
+        });
+    </script>
+    <!-- //credit-card -->
+    <!-- //js-scripts-->
+    @RenderSection("cartSection", required: false)
+    @RenderSection("Login", required: false)
+    @RenderSection("jsRender", required: false)
+</body>
+</html>

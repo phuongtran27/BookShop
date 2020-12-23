@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Các tác giả";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var author = (List<string>)ViewBag.allAuthor;
+    var count = (List<BookShop.Models.EF.Book>)ViewBag.CountAuthor;
+}
+
+
+<div id="maincontent" class="col-xs-12 col-sm-8 col-md-9">
+    <div class="boxmain">
+        <div class="tit-boxmain">
+            <h3> Tác giả </h3>
+        </div>
+        <div class="ct-boxmain row m0">
+
+            @foreach (var item in author)
+            {
+                var i = 0;
+                foreach (var itemCount in count)
+                {
+                    if (itemCount.Author == item)
+                    {
+                        i++;
+                    }
+                }
+                var url = "/Tac-gia/" + item;
+                <div class="col-xs-6 col-sm-4 col-md-3 p5">
+                    <div class="boxsp">
+                        <div class="imgsp">
+                            <a href="@url"><img class="imgproduct" src="~/Assets/Client/images/noimage.gif" style="width:120px;height:168px;"></a>
+                        </div>
+                        <div class="namesp">
+                            <a href="@url" title="@item (@i)">@item (@i)</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+

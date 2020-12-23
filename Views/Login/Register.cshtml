@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/LayoutDetail.cshtml";
+    var log = (BookShop.Models.DTO.UserLogin)ViewBag.login;
+}
+
+
+
+
+<div class="container">
+    <div class="pathway"><ul><li><a href="http://nobita.vn" title="Trang chủ">Trang chủ</a></li><li>Đăng ký</li></ul></div>
+    <div class="sortable" id="layoutGroup1">
+        <div class="block" id="module_Login">
+            <h1>
+                Đăng ký <span>hoặc</span>
+                <a href="/Dang-nhap" title="Đăng ký">Đăng nhập</a>
+            </h1>
+            <div class="blockcontent">
+                <div class="loginsocial">
+                    <h3 style="border:none;">Đăng nhập bằng</h3>
+                    <div class="buttom">
+                        <div><a href="javascript:" class="btn_face" onclick="checkLoginState();"></a></div>
+                    </div>
+                </div>
+                <h3 style="border:none;">Thông tin đăng nhập</h3>
+                <div class="registerform">
+                    @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+                    {
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="idemail">Email</label> <span class="Required">*</span>:
+                            </div>
+                            <input type="text" autocomplete="off" onfocus="showhelp(1)" onblur="cemail(this.value, 1)" onkeyup="cemail(this.value)" id="idemail" name="email" value="">
+                            <span class="help" id="help1">Nhập email của bạn</span>
+                        </div>
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="idpassword">Mật khẩu</label> <span class="Required">*</span>:
+                            </div>
+                            <input autocomplete="off" onfocus="showhelp(2)" onblur="fonblur(2)" id="idpassword" type="password" name="pass">
+                            <span class="help" id="help2">Mật khẩu phải có ít nhất 6 ký tự</span>
+                        </div>
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="repassword">Xác nhận mật khẩu</label> <span class="Required">*</span>:
+                            </div>
+                            <input autocomplete="off" onfocus="showhelp(3)" onblur="fonblur(3)" id="repassword" type="password" name="repassword">
+                            <span class="help" id="help3">Xác nhận lại mật khẩu</span>
+                        </div>
+                        <div class="clear"></div>
+                        <h3>Thông tin cá nhân</h3>
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="fullname">Họ và tên</label> <span class="Required">*</span>:
+                            </div>
+
+                            <input onfocus="showhelp(4)" onblur="fonblur(4)" autocomplete="off" id="fullname" type="text" name="name" class="Field197" value="">
+                            <span class="help" id="help4"></span>
+                        </div>
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="telephone">Điện thoại</label> <span class="Required">*</span>:
+                            </div>
+                            <input onfocus="showhelp(5)" onblur="fonblur(5)" autocomplete="off" id="telephone" type="text" name="phone" value="">
+                            <span class="help" id="help5"></span>
+                        </div>
+
+
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="telephone">Địa chỉ</label> <span class="Required">*</span>:
+                            </div>
+                            <input type="text" name="Adress" value="" style="height:50px;">
+                            <span class="help" id="help7"></span>
+                        </div>
+
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="telephone">Ngày sinh</label>:
+                            </div>
+                            <select name="dd" id="dd" class="Field50">
+                                <option value="0">ngày</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select name="mm" id="mm" class="Field50">
+                                <option value="0">Tháng</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <input type="text" class="Field50" name="yy" value="" size="4" maxlength="4" id="yy">
+                            <span class="help" id="help6">(Không bắt buộc)</span>
+                        </div>
+
+
+                        <div class="clear">&nbsp;</div>
+
+                        <div class="clear">&nbsp;&nbsp;</div>
+                        <div class="field" style="padding-left:200px">
+                            <input type="submit" align="absmiddle" class="loginbuton Field200" value="Đăng ký">
+                            <input type="hidden" name="redirect" value="">
+                            <input type="hidden" name="C2f22ab9d091c5e31d7011eaa64b1c980" value="1">
+                        </div>
+
+                    }
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        @section Login{
+            <script src="~/Assets/Client/js/Controller/Register.js"></script>
+        }
+    </div>
+</div>

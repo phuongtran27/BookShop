@@ -1,0 +1,113 @@
+﻿<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="">Book Shop</a>
+    </div>
+    <!-- /.navbar-header -->
+    <ul class="nav navbar-top-links navbar-right">
+
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                @if (Session["user_admin"] != null)
+                {
+                    <i class="fa fa-user fa-fw"></i>
+                        @Session["user_admin"]
+                    <i class="fa fa-caret-down"></i>
+                }
+                else
+                {
+                    Response.Redirect("~/Admin/Login/Index");
+                }
+
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="/"><i class="fa fa-user fa-fw"></i>Về trang web</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="/Admin/Login/Logout"><i class="fa fa-sign-out fa-fw"></i>Đăng xuất</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+        <!--Kết thúc menu-->
+    </ul>
+    <!-- /.navbar-top-links -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <!--Tìm kiếm-->
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <!--End Tìm kiếm-->
+
+                <li>
+                    <a href="/Admin/Home/Index"><i class="fa fa-dashboard fa-fw"></i>Trang chủ</a>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-book fa-fw"></i>Quản lý sách<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/Admin/Book/Index">Tất cả sách</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Book/Create">Thêm mới sách</a>
+                        </li>
+
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="/Admin/User/Index"><i class="fa fa-user fa-fw"></i>Quản lý người dùng</a>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-address-book fa-fw"></i>Quản lý đơn hàng<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/Admin/Order/Index">Danh sách đơn hàng</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Inward/Index">Nhập kho</a>
+                        </li>
+
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i>Quản lý danh mục<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/Admin/Banner/Index">Quản lý Banner</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Banner/Create">Thêm banner</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>

@@ -1,0 +1,10 @@
+﻿@model List<BookShop.Models.EF.Menu>
+<div class="container">
+    <ul class="x1">
+        @foreach (var item in Model)
+        {
+            <li><a href="@item.Link" target="@item.Target">@item.Text</a></li>
+        }
+        <li><a href="tel:01649.629.629">HOTLINE: 01649.629.629 (từ 8h-22h cả T7,CN)</a></li>
+    </ul>
+</div>

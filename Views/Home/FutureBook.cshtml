@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Sách sắp phát hành";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var futureBook = (List<BookShop.Models.EF.Book>)ViewBag.FutureBook;
+}
+
+
+
+<div id="maincontent" class="col-xs-12 col-sm-8 col-md-9">
+    <div class="boxmain">
+        <div class="tit-boxmain">
+            <h3><span>Sách sắp phát hành</span></h3>
+        </div>
+        <div class="ct-boxmain row m0">
+
+            @foreach (var item in futureBook)
+            {
+                var url = "/sap-phat-hanh/" + item.MetaTitle + "-" + item.ID;
+                int sale = (int)((1 - item.Price / item.PromotionPrice) * 100);
+                <div class="col-xs-6 col-sm-4 col-md-3 p5">
+                    <div class="boxsp">
+                        <div class="imgsp">
+                            <a href="@url"><img class="imgproduct" src="@item.Image" style="width:196px;height:300px;"></a>
+                            <div class="img-label">
+                                <div class="col-xs-4 p0">
+                                    <span class="salePrice">-@sale %</span>
+                                </div>
+                                @*<img src="/Assets/Client/images/hot.png">*@
+                            </div>
+                        </div>
+                        <div class="namesp">
+                            <a href="" title="@item.Name">@item.Name</a>
+                        </div>
+                        <div class="Tac-Gia" style="text-align:center;"><a href="#">@item.Author</a></div>
+                        <div class="prices" style="text-align:center">@item.Price.Value.ToString("N0") ₫</div>
+                        <div class="rootPrinces" style="text-align:center">@item.PromotionPrice.Value.ToString("N0") ₫</div>
+                        <div class="button-hd">
+                            <a href="/them-gio-hang?BookID=@item.ID&quantity=1"><i class="fa fa-shopping-cart" aria-hidden="true" title="Thêm giỏ hàng của bạn"></i></a>
+
+                            <a href="@url"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+

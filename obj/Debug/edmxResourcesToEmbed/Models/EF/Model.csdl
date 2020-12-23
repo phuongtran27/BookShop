@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookShopEntites" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AboutNXB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MetaKeyword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescription" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Released" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NXB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Buys" Type="Int32" />
+    <Property Name="Weight" Type="Int32" />
+    <Property Name="Form" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NumberPage" Type="Int32" />
+    <Property Name="PublishDate" Type="DateTime" Precision="0" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MetaTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Modelmage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PromotionPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CategoryID" Type="Int64" />
+    <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MetaKeyword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescription" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="TopHot" Type="DateTime" Precision="3" />
+    <Property Name="ViewCount" Type="Int32" />
+    <NavigationProperty Name="Book1" Relationship="Self.FK_Book_Book" FromRole="Book" ToRole="Book1" />
+    <NavigationProperty Name="Book2" Relationship="Self.FK_Book_Book" FromRole="Book1" ToRole="Book" />
+    <NavigationProperty Name="BookCategory" Relationship="BookShopEntites.FK_Book_BookCategory" FromRole="Book" ToRole="BookCategory" />
+    <NavigationProperty Name="Feedbacks" Relationship="BookShopEntites.FK_Feedback_Book" FromRole="Book" ToRole="Feedback" />
+    <NavigationProperty Name="Inward_Detail" Relationship="BookShopEntites.FK_Inward_Detail_Book" FromRole="Book" ToRole="Inward_Detail" />
+    <NavigationProperty Name="Order_Detail" Relationship="BookShopEntites.FK_Order_Detail_Book" FromRole="Book" ToRole="Order_Detail" />
+    <NavigationProperty Name="Slides" Relationship="BookShopEntites.FK_Slide_Book" FromRole="Book" ToRole="Slide" />
+    <Property Name="Quantity" Type="Int32" />
+  </EntityType>
+  <EntityType Name="BookCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaTitle" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="ParentID" Type="Int64" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="SeoTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MeteKeyword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescription" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Books" Relationship="BookShopEntites.FK_Book_BookCategory" FromRole="BookCategory" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaTitle" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="ParentID" Type="Int64" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="SeoTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MetaKeyword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescription" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_ID" Type="Int64" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="Rating_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Book_ID" Type="Int64" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Book" Relationship="BookShopEntites.FK_Feedback_Book" FromRole="Feedback" ToRole="Book" />
+    <NavigationProperty Name="User" Relationship="BookShopEntites.FK_Feedback_User" FromRole="Feedback" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Footer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="Target" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="TypeID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="MenuType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Order_Detail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookID" Type="Int64" Nullable="false" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Book" Relationship="BookShopEntites.FK_Order_Detail_Book" FromRole="Order_Detail" ToRole="Book" />
+    <NavigationProperty Name="Order" Relationship="BookShopEntites.FK_Order_Detail_Order" FromRole="Order_Detail" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Slide">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="BookID" Type="Int64" />
+    <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MetaKeyword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescription" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Book" Relationship="BookShopEntites.FK_Slide_Book" FromRole="Slide" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DayOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Adress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MetaKeyword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="Feedbacks" Relationship="BookShopEntites.FK_Feedback_User" FromRole="User" ToRole="Feedback" />
+    <NavigationProperty Name="Orders" Relationship="BookShopEntites.FK_Order_User" FromRole="User" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="PassWord" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ShipAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="Order_Detail" Relationship="BookShopEntites.FK_Order_Detail_Order" FromRole="Order" ToRole="Order_Detail" />
+    <Property Name="User_ID" Type="Int64" />
+    <Property Name="TotalMoney" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TotalQuantity" Type="Int32" />
+    <Property Name="ShipDate" Type="DateTime" Precision="3" />
+    <Property Name="CancerDate" Type="DateTime" Precision="3" />
+    <Property Name="PaidDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="User" Relationship="BookShopEntites.FK_Order_User" FromRole="Order" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Book_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="Book1" Type="Self.Book" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Book1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookShopDbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AboutNXBs" EntityType="Self.AboutNXB" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="BookCategories" EntityType="Self.BookCategory" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+    <EntitySet Name="Footers" EntityType="Self.Footer" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="MenuTypes" EntityType="Self.MenuType" />
+    <EntitySet Name="Order_Detail" EntityType="Self.Order_Detail" />
+    <EntitySet Name="Slides" EntityType="Self.Slide" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <AssociationSet Name="FK_Book_Book" Association="Self.FK_Book_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Book1" EntitySet="Books" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="Inwards" EntityType="BookShopEntites.Inward" />
+    <EntitySet Name="Inward_Detail" EntityType="BookShopEntites.Inward_Detail" />
+    <AssociationSet Name="FK_Book_BookCategory" Association="BookShopEntites.FK_Book_BookCategory">
+      <End Role="BookCategory" EntitySet="BookCategories" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Feedback_Book" Association="BookShopEntites.FK_Feedback_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Feedback" EntitySet="Feedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inward_Detail_Book" Association="BookShopEntites.FK_Inward_Detail_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Inward_Detail" EntitySet="Inward_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Detail_Book" Association="BookShopEntites.FK_Order_Detail_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Order_Detail" EntitySet="Order_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Slide_Book" Association="BookShopEntites.FK_Slide_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Slide" EntitySet="Slides" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Feedback_User" Association="BookShopEntites.FK_Feedback_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Feedback" EntitySet="Feedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inward_Detail_Inward" Association="BookShopEntites.FK_Inward_Detail_Inward">
+      <End Role="Inward" EntitySet="Inwards" />
+      <End Role="Inward_Detail" EntitySet="Inward_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Detail_Order" Association="BookShopEntites.FK_Order_Detail_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Order_Detail" EntitySet="Order_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_User" Association="BookShopEntites.FK_Order_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Inward">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TotalQuantity" Type="Int64" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Createdate" Type="DateTime" Precision="3" />
+    <Property Name="RecivedInfo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Inward_Detail" Relationship="BookShopEntites.FK_Inward_Detail_Inward" FromRole="Inward" ToRole="Inward_Detail" />
+  </EntityType>
+  <EntityType Name="Inward_Detail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Inward_ID" Type="Int64" />
+    <Property Name="Book_ID" Type="Int64" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Book" Relationship="BookShopEntites.FK_Inward_Detail_Book" FromRole="Inward_Detail" ToRole="Book" />
+    <NavigationProperty Name="Inward" Relationship="BookShopEntites.FK_Inward_Detail_Inward" FromRole="Inward_Detail" ToRole="Inward" />
+  </EntityType>
+  <Association Name="FK_Book_BookCategory">
+    <End Type="BookShopEntites.BookCategory" Role="BookCategory" Multiplicity="0..1" />
+    <End Type="BookShopEntites.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookCategory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Feedback_Book">
+    <End Type="BookShopEntites.Book" Role="Book" Multiplicity="0..1" />
+    <End Type="BookShopEntites.Feedback" Role="Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inward_Detail_Book">
+    <End Type="BookShopEntites.Book" Role="Book" Multiplicity="0..1" />
+    <End Type="BookShopEntites.Inward_Detail" Role="Inward_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inward_Detail">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Detail_Book">
+    <End Type="BookShopEntites.Book" Role="Book" Multiplicity="1" />
+    <End Type="BookShopEntites.Order_Detail" Role="Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order_Detail">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Slide_Book">
+    <End Type="BookShopEntites.Book" Role="Book" Multiplicity="0..1" />
+    <End Type="BookShopEntites.Slide" Role="Slide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Slide">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Feedback_User">
+    <End Type="BookShopEntites.User" Role="User" Multiplicity="0..1" />
+    <End Type="BookShopEntites.Feedback" Role="Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inward_Detail_Inward">
+    <End Type="BookShopEntites.Inward" Role="Inward" Multiplicity="0..1" />
+    <End Type="BookShopEntites.Inward_Detail" Role="Inward_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inward">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Inward_Detail">
+        <PropertyRef Name="Inward_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Detail_Order">
+    <End Type="BookShopEntites.Order" Role="Order" Multiplicity="1" />
+    <End Type="BookShopEntites.Order_Detail" Role="Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order_Detail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_User">
+    <End Type="BookShopEntites.User" Role="User" Multiplicity="0..1" />
+    <End Type="BookShopEntites.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

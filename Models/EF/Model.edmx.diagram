@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f31337d74cf6479f80797bc7c4da5085" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="BookShopEntites.AboutNXB" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Book" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.BookCategory" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Category" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Feedback" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Footer" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Menu" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.MenuType" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Order_Detail" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Slide" Width="1.5" PointX="0.875" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.User" Width="1.5" PointX="6.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Admin" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopEntites.Order" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="BookShopEntites.FK_Book_Book" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BookShopEntites.Inward" Width="1.5" PointX="4.75" PointY="15.125" />
+        <EntityTypeShape EntityType="BookShopEntites.Inward_Detail" Width="1.5" PointX="4.75" PointY="4.875" />
+        <AssociationConnector Association="BookShopEntites.FK_Book_BookCategory" />
+        <AssociationConnector Association="BookShopEntites.FK_Feedback_Book" />
+        <AssociationConnector Association="BookShopEntites.FK_Inward_Detail_Book" />
+        <AssociationConnector Association="BookShopEntites.FK_Order_Detail_Book" />
+        <AssociationConnector Association="BookShopEntites.FK_Slide_Book" />
+        <AssociationConnector Association="BookShopEntites.FK_Feedback_User" />
+        <AssociationConnector Association="BookShopEntites.FK_Inward_Detail_Inward" />
+        <AssociationConnector Association="BookShopEntites.FK_Order_Detail_Order" />
+        <AssociationConnector Association="BookShopEntites.FK_Order_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

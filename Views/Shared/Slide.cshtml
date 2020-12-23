@@ -1,0 +1,23 @@
+﻿@{
+    var slide = (List<BookShop.Models.EF.Slide>)ViewBag.slide;
+    var book = (List<BookShop.Models.EF.Book>)ViewBag.Book;
+}
+
+<div class="col-xs-12 col-sm-8 col-md-9">
+    <div class="slider-wrapper theme-default">
+        <div id="slider" class="nivoSlider">
+            @foreach (var item in slide)
+            {
+                foreach (var itemBook in book)
+                {
+                    if (item.BookID == itemBook.ID)
+                    {
+                        var url = "/chi-tiet/" + itemBook.MetaTitle + "-" + itemBook.ID;
+                        <a href="@url"><img src="@item.Image" alt="" /></a>
+                    }
+                }
+
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,167 @@
+﻿
+@{
+    Layout = null;
+    float tong = 0, vat = 0, km = 0;
+    int dem = 0;
+    var OrderDetail = ViewBag.OrderDetail as List<BookShop.Models.DTO.Order_DetailDTO>;
+    var UserOrder = ViewBag.UserOrder as BookShop.Models.DTO.UserDTO;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Hóa đơn | BookShop</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- <link href="css/main.css" rel="stylesheet"> -->
+</head>
+<!--/head-->
+
+<body>
+    <div class="container text-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">TheBookShop - Website bán sách</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <!-- /.panel-heading -->
+                        <div class="panel-heading">
+                            Hóa đơn bán hàng
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div class="col-sm-12">
+                                    <div class="text-left">
+                                        <p>
+                                            Họ và tên khách hàng: <strong>@UserOrder.Name</strong>
+                                        </p>
+                                        <p>
+                                            Số điện thoại: &emsp;&emsp;&emsp;&ensp; <strong>@UserOrder.Phone</strong>
+                                        </p>
+                                        <p>
+                                            Địa chỉ nhận hàng: &emsp;&nbsp; <strong>@UserOrder.Adress</strong>
+                                        </p>
+                                        <p>
+                                            Email: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; <strong>@UserOrder.Email</strong>
+                                        </p>
+                                    </div>
+                                    @*<div class="col-sm-7 text-left">
+
+                                        </div>
+                                        <div class="col-sm-3 text-right">
+                                            <span></span>
+                                            <span style="font-weight: bold;"></span>
+                                        </div>
+                                        <div class="col-sm-7 text-left">
+
+                                        </div>
+                                        <div class="col-sm-3 text-right">
+                                            <span>Địa chỉ:</span>
+                                        </div>
+                                        <div class="col-sm-7 text-left">
+                                            <span style="font-weight: bold;">@UserOrder.Adress</span>
+                                        </div>
+                                        <div class="col-sm-3 text-right">
+                                            <span>Email:</span>
+                                        </div>
+                                        <div class="col-sm-7 text-left">
+                                            <span style="font-weight: bold;">@UserOrder.Email</span>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-heading">
+                            Chi tiết hóa đơn
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="text-center">
+                                                STT
+                                            </th>
+                                            <th class="text-center">
+                                                Sản phẩm
+                                            </th>
+                                            <th class="text-center">
+                                                Số lượng
+                                            </th>
+                                            <th class="text-center">
+                                                Đơn giá
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        @foreach (var item in OrderDetail)
+                                        {
+                                            dem++;
+                                            <tr class="gradeA even " role="row ">
+                                                <td class="text-center ">@dem</td>
+                                                <td>@item.Book_Name</td>
+                                                <td class="text-center ">@item.Quantity</td>
+                                                <td class="text-center ">@item.Price.Value.ToString("N0")</td>
+                                            </tr>
+                                            tong += (float)(item.Quantity * item.Price);
+                                        }
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row ">
+                <div class="col-lg-6">
+                    <div class="dataTables_info " id="dataTables-example_info " role="status " aria-live="polite "></div>
+                </div>
+                <div class="col-lg-5" style="margin-bottom:10px ">
+                    <div class="dataTables_info " id="dataTables-example_info " role="status " aria-live="polite ">
+                        Thuế VAT (10%): &emsp;<span>@vat.ToString("N0")</span> vnđ
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="dataTables_info " id="dataTables-example_info " role="status " aria-live="polite "></div>
+                </div>
+                <div class="col-lg-5" style="margin-bottom:10px ">
+                    <div class="dataTables_info " id="dataTables-example_info " role="status " aria-live="polite ">
+                        Khuyến mãi 15%: &emsp; <span>@km.ToString("N0")</span> vnđ
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="dataTables_info " id="dataTables-example_info " role="status " aria-live="polite "></div>
+                </div>
+                <div class="col-lg-5" style="margin-bottom:10px ">
+                    <div class="dataTables_info " id="dataTables-example_info " role="status " aria-live="polite ">
+                        Tổng tiền: <span style="color:red; font-weight:bold; font-size:25px ">@tong.ToString("N0")</span> vnđ
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+    </div>
+</body>
+
+</html>

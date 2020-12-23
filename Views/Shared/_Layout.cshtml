@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+@{
+    var bookView = (List<BookShop.Models.EF.Book>)ViewBag.BookViewLeft;
+    var session = (BookShop.Models.EF.User)Session[BookShop.Controllers.LoginController.userSession];
+    @model List<BookShop.Models.DTO.CartItem>
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- BOOTSTRAP CSS -->
+    <link href="/Assets/Client/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Assets/Client/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link href="~/Assets/Client/css/Notify/BrightTheme.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotify.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotifyBootstrap3.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotifyConfirm.css" rel="stylesheet" />
+    <script src="~/Assets/Client/js/Notify/PNotify.js"></script>
+    <script src="~/Assets/Client/js/Notify/PNotifyBootstrap3.js"></script>
+    <script src="~/Assets/Client/js/Notify/PNotifyConfirm.js"></script>
+
+    <!-- AWESOME ICON FONT -->
+    <link href="/Assets/Client/lib/awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- IMPORT FONT GOOGLE LINK -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,700,300&amp;subset=vietnamese,latin,latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/Assets/Client/css/jquery-ui.css" rel="stylesheet" />
+    <link href="/Assets/Client/css/Cart.css" rel="stylesheet" />
+    <link href="/Assets/Client/css/style.css" rel="stylesheet">
+
+
+    <!-- SLIDE CSS -->
+    <link rel="stylesheet" href="/Assets/Client/lib/slider/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/Assets/Client/lib/slider/nivo-slider.css" type="text/css" media="screen" />
+
+    <!-- Owl Carousel Assets -->
+    <link href="/Assets/Client/lib/owlcarousel/owl.carousel.css" rel="stylesheet">
+    <link href="/Assets/Client/lib/owlcarousel/owl.theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Assets/Client/lib/awesome/css/font-awesome.css" />
+
+
+
+
+    <script type="text/javascript" src="/Assets/Client/js/jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+    <header id="header">
+        <div class="topbar">
+            <div class="container">
+                <div class="col-xs-12 col-sm-6 p0 hotline-top">
+                    <img src="/Assets/Client/images/phone-24.png" alt="hotline" />
+                    <p>Điện thoại: <a href="tel:01649.629.629">01649.629.629</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="header">
+            <div class="container">
+                <div class="col-xs-12 col-md-4">
+                    <div id="logo">
+                        <a href="/"><img src="/Assets/Client/images/Logo2.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div id="search">
+                        <form action="/tim-kiem" method="get">
+                            <input type="text" name="keyword" id="txtKeyword" placeholder="Tìm sách" />
+                            <button type="submit" name="btn_search">Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    @if (session != null)
+                    {
+                        <div class="Login">
+                            <div class="TextLable" title="@session.Name">
+                                <a>
+                                    <span class="glyphicon glyphicon-log-in" style="height:100px;"></span>@session.Name
+                                </a>
+                            </div>
+                            <div class="display-Text" style="height:100px; width:190px;">
+                                <div class="buttom">
+                                    <div>
+                                        <a href="/User/OrderHistory/@session.ID" class="YourCart"  style="margin-left:25px;"><i class="glyphicon glyphicon-calendar"></i>Lịch sử mua hàng</a>
+                                    </div>
+                                    <div>
+                                        <a href="/User/Orders/@session.ID" class="YourCart"  style="margin-left:25px;"><i class="glyphicon glyphicon-shopping-cart"></i>Đơn hàng của bạn</a>
+                                    </div>
+                                    <div>
+                                        <a href="/Dang-xuat" class="YourCart"><i class="glyphicon glyphicon-log-out"></i>Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <script>
+
+                            // [1] Load lên các thành phần cần thiết
+                            window.fbAsyncInit = function () {
+                                FB.init({
+                                    appId: '1964207797166296',
+                                    cookie: true,
+                                    xfbml: true,
+                                    version: 'v2.8'
+                                });
+                                // Kiểm tra trạng thái hiện tại
+                                FB.getLoginStatus(function (response) {
+                                    statusChangeCallback(response);
+                                });
+
+                            }
+
+                            function checkLoginState() {
+                                FB.getLoginStatus(function (response) {
+                                    statusChangeCallback(response);
+                                });
+                            }
+
+                            // [2] Xử lý trạng thái đăng nhập
+                            function statusChangeCallback(response) {
+                                // Người dùng đã đăng nhập FB và đã đăng nhập vào ứng dụng
+                                if (response.status === 'connected') {
+                                    testAPI();
+                                }
+                                    // Người dùng đã đăng nhập FB nhưng chưa đăng nhập ứng dụng
+                                else if (response.status === 'not_authorized') {
+
+                                }
+                                    // Người dùng chưa đăng nhập FB
+                                else {
+
+                                }
+                            }
+
+                            // [3] Yêu cầu đăng nhập FB
+                            function RequestLoginFB() {
+                                window.location = 'http://graph.facebook.com/oauth/authorize?client_id=1964207797166296&scope=public_profile,email,user_likes&redirect_uri=/';
+                            }
+
+                            // [4] Hiển thị nút đăng nhập
+                            function ShowLoginButton() {
+                                document.getElementById('btb').setAttribute('style', 'display:block');
+                                document.getElementById('lbl').setAttribute('style', 'display:none');
+                            }
+
+                            // [5] Chào mừng người dùng đã đăng nhập
+                            function ShowWelcome() {
+                                document.getElementById('btb').setAttribute('style', 'display:none');
+                                FB.api('/me', function (response) {
+                                    var name = response.name;
+                                    var username = response.username;
+                                    var id = response.id;
+                                    document.getElementById('lbl').innerHTML = 'Tên=' + name + ' | username=' + username + ' | id=' + id;
+                                    document.getElementById('lbl').setAttribute('style', 'display:block');
+                                });
+                            }
+
+
+                            (function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) return;
+                                js = d.createElement(s); js.id = id;
+                                js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=1964207797166296';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));
+
+                            function testAPI() {
+                                console.log('Welcome!  Fetching your information.... ');
+                                FB.api('/me', function (response) {
+                                    console.log('Successful login for: ' + response.name);
+                                    document.getElementById('status').innerHTML =
+                                      'Thanks for logging in, ' + response.name + '!';
+                                });
+                            }
+                        </script>
+
+                        <div class="Login">
+                            <div class="TextLable" title="Đăng nhập">
+                                <a>
+                                    <span class="glyphicon glyphicon-log-in" style="height:100px;"></span>Đăng nhập
+                                </a>
+                            </div>
+                            <div class="display-Text">
+                                <div class="buttom">
+                                    @*<div>
+                                        <a href="/Login/LoginFacebook" class="btn_face"></a>
+                                    </div>*@
+                                    <div>
+                                        <a class="btn_login" href="/Dang-nhap">Đăng nhập</a>
+                                    </div>
+                                    <div class="loginlink">
+                                        Khách hàng mới?
+                                        <a href="/Dang-ky">Tạo tài khoản</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model != null)
+                    {
+                        var sum = new long();
+                        <div class="cart">
+                            <div class="discart">
+                                <span class="mycart">Giỏ hàng:</span>
+                                <span class="count_products_cart">
+                                    @Model.Count Sản phẩm
+                                </span>
+                            </div>
+                            <div class="top-cart-content">
+                                <div class="CartHover">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="small_products">
+                                            <a href="#">
+                                                <div class="image">
+                                                    <img src="@item.Book.Image" title="@item.Book.Name">
+                                                </div>
+                                                <div class="info">
+                                                    <div class="title">@item.Book.Name</div>
+                                                    <div class="Tac-Gia" style="color:#00cc66; font-size:12px; margin:4px 10px; ">@item.Book.Author</div>
+                                                    <div class="prices">@((item.Book.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0")) ₫</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        sum += (long)(item.Book.Price.GetValueOrDefault(0) * item.Quantity);
+                                    }
+
+                                    <div class="ctotal">
+                                        Tổng tiền: <b>@sum.ToString("N0") ₫ </b>
+                                    </div>
+                                    <div class="buttom" id="showcartlink">
+                                        <a class="cartlink" href="/Cart" title="GIỎ HÀNG CỦA TÔI">
+                                            Xem giỏ hàng
+                                            <i class="fa fa-play"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="cart">
+                            <div class="discart">
+                                <span class="mycart">Giỏ hàng:</span>
+                                <span class="count_products_cart">
+                                    0 sản phẩm
+                                </span>
+                            </div>
+                            <div class="top-cart-content">
+                                <div class="CartHover">
+                                    Bạn chưa có sản phẩm nào trong giỏ hàng
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <nav id="mainmenu" class="hidden-xs hidden-sm ">
+            @{Html.RenderAction("MainMenu", "Home"); }
+        </nav>
+    </header>
+    <div id="home">
+        <div class="container">
+            <section id="featured">
+                <div class="hidden-xs col-sm-4 col-md-3">
+                    @{Html.RenderAction("LeftMenu", "Home");}
+                </div>
+
+                @{ Html.RenderAction("Slide", "Home");}
+            </section>
+            <section id="main">
+                <div id="left" class="col-xs-12 col-sm-4 col-md-3">
+                    <div class="boxleft hidden-xs">
+                        <div class="titboxl">
+                            <i class="fa fa-share fa-x2 fa-lg" aria-hidden="true"></i>
+                            <span>Sản phẩm bán chạy</span>
+                        </div>
+                        <div class="ctboxleft">
+                            @foreach (var item in bookView)
+                            {
+                                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                int sale = (int)((1 - item.Price / item.PromotionPrice) * 100);
+                                <div class="boxspl">
+                                    <div class="col-xs-4 p0">
+                                        <a href="@url"><img src="@item.Image" alt=""></a>
+                                        <span class="salePrice">-@sale%</span>
+                                    </div>
+                                    <div class="col-xs-8 p5">
+                                        <div class="tit-boxspl">
+                                            <a href="@url" class="noneHover">@item.Name</a>
+                                        </div>
+                                        <div><a href="" class="Tac-Gia">@item.Author</a></div>
+                                        <div class="price">@item.Price.Value.ToString("N0") ₫</div>
+                                        <div class="rootPrinces">@item.PromotionPrice.Value.ToString("N0") ₫</div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="boxleft hidden-xs">
+                        <div class="titboxl">
+                            <i class="fa fa-rss-square fa-x2 fa-lg" aria-hidden="true"></i>
+                            <span>Tin tức</span>
+                        </div>
+                        <div class="ctboxleft">
+                            <div id="slider-tintuc" class="owl-carousel">
+                                <div class="item tintucl">
+                                    <a href=""><img src="/Assets/Client/images/doi-thay-doi-khi-chung-ta-thay-doi-ohay-tv-98954.jpg"></a>
+                                    <h3><a href="">10 cuốn sách hay nên đọc có thể thay đổi cuộc đời bạn</a></h3>
+                                    <p>Kích thích trí não, giảm căng thẳng, cải thiện trí nhớ, tăng khả năng tập trung... rất nhiều lý do để bạn nên đọc sách. Chia sẻ cùng các bạn 10 cuốn sách hay nhất, bạn nên đọc nó bởi vì có thể nó sẽ thay đổi cuộc đời bạn đấy!...</p>
+                                </div>
+                                <div class="item tintucl">
+                                    <a href=""><img src="/Assets/Client/images/doi-thay-doi-khi-chung-ta-thay-doi-ohay-tv-98954.jpg"></a>
+                                    <h3><a href="">10 cuốn sách hay nên đọc có thể thay đổi cuộc đời bạn</a></h3>
+                                    <p>Kích thích trí não, giảm căng thẳng, cải thiện trí nhớ, tăng khả năng tập trung... rất nhiều lý do để bạn nên đọc sách. Chia sẻ cùng các bạn 10 cuốn sách hay nhất, bạn nên đọc nó bởi vì có thể nó sẽ thay đổi cuộc đời bạn đấy!...</p>
+                                </div>
+                                <div class="item tintucl">
+                                    <a href=""><img src="/Assets/Client/images/doi-thay-doi-khi-chung-ta-thay-doi-ohay-tv-98954.jpg"></a>
+                                    <h3><a href="">10 cuốn sách hay nên đọc có thể thay đổi cuộc đời bạn</a></h3>
+                                    <p>Kích thích trí não, giảm căng thẳng, cải thiện trí nhớ, tăng khả năng tập trung... rất nhiều lý do để bạn nên đọc sách. Chia sẻ cùng các bạn 10 cuốn sách hay nhất, bạn nên đọc nó bởi vì có thể nó sẽ thay đổi cuộc đời bạn đấy!...</p>
+                                </div>
+                                <div class="item tintucl">
+                                    <a href=""><img src="/Assets/Client/images/doi-thay-doi-khi-chung-ta-thay-doi-ohay-tv-98954.jpg"></a>
+                                    <h3><a href="">10 cuốn sách hay nên đọc có thể thay đổi cuộc đời bạn</a></h3>
+                                    <p>Kích thích trí não, giảm căng thẳng, cải thiện trí nhớ, tăng khả năng tập trung... rất nhiều lý do để bạn nên đọc sách. Chia sẻ cùng các bạn 10 cuốn sách hay nhất, bạn nên đọc nó bởi vì có thể nó sẽ thay đổi cuộc đời bạn đấy!...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxleft hidden-xs">
+                        <div class="ctboxleft qc">
+                            <a href=""><img src="/Assets/Client/images/cach-thuc-mua-hang.gif"></a>
+                        </div>
+                    </div>
+                </div>
+                @RenderBody()
+                <!--end content-->
+            </section>
+        </div>
+    </div>
+    <footer id="footer">
+        @{Html.RenderAction("Footer", "Home");}
+    </footer>
+    <div class="copyright">
+        <div class="container">
+            <p>Copyright © 2016 <a href="http://themeviet.org/" target="_blank">Themeviet.org</a>. All Rights Reserved.</p>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="/Assets/Client/lib/slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(window).load(function () {
+            $('#slider').nivoSlider();
+        });
+    </script>
+
+    <!-- Owl Carousel Assets -->
+    <script src="/Assets/Client/lib/owlcarousel/owl.carousel.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#slider-tintuc").owlCarousel({
+                autoPlay: 3000,
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true
+            });
+            $("#spmoi").owlCarousel({
+                autoPlay: 3000,
+                // items : 4,
+                //  itemsDesktop : [1199,3],
+                //  itemsDesktopSmall : [979,3],
+                //  itemsMobile : [768,2]
+                itemsCustom: [
+                    [0, 2],
+                    [600, 3],
+                    [1200, 4],
+                ],
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        // hidden-show children menu
+        $(document).ready(function () {
+            //use event delegation since classes are changed dynamically
+            $('.ulspmobi').on('click', '.iconlist', function () {
+                //remove the show class and assign hidden
+                $(this).toggleClass('iconlist1 iconlist');
+                //the subfield is a child of the parent not the next sibling
+                $(this).siblings('ul.mnboxl_1').show('slow');
+            });
+            $('.ulspmobi').on('click', '.iconlist1', function () {
+                $(this).toggleClass('iconlist1 iconlist');
+                $(this).siblings('ul.mnboxl_1').hide('slow');
+            });
+        });
+    </script>
+    <script src="/Assets/Client/js/jquery-ui.js"></script>
+    <script src="/Assets/Client/js/Controller/BaseController.js"></script>
+    @RenderSection("jsRender", required: false)
+</body>
+</html>

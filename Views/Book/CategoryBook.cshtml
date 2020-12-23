@@ -1,0 +1,35 @@
+﻿@{
+    var category = (List<BookShop.Models.EF.Category>)ViewBag.Category;
+    var categoryBook = (List<BookShop.Models.EF.BookCategory>)ViewBag.BookCategory;
+}
+
+<div class="dropdown">
+    <div class="dropbtn">
+        <i class="fa fa-bars fa-x2 fa-lg" aria-hidden="true" style="color: #fff;"></i>
+        <span>Danh mục sản phẩm</span>
+    </div>
+    <div class="dropdown-content">
+        <ul class="mnboxl">
+            @foreach (var item in category)
+            {
+                <li>
+                    <a href="@item.MetaTitle">@item.Name</a>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <div class="dropdown-content-1">
+                        @foreach (var itemBook in categoryBook)
+                        {
+                            if (item.ID == itemBook.ParentID)
+                            {
+                                <a href="@itemBook.MetaTitle">@itemBook.Name</a>
+                            }
+
+                        }
+
+                    </div>
+                </li>
+            }
+
+
+        </ul>
+    </div>
+</div>

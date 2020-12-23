@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/LayoutDetail.cshtml";
+}
+
+
+<div class="container">
+    <div class="pathway"><ul><li><a href="http://nobita.vn" title="Trang chủ">Trang chủ</a></li><li>Đăng nhập</li></ul></div>
+    <div class="sortable" id="layoutGroup1">
+        <div class="block" id="module_Login">
+            <h1>
+                Đăng nhập <span>hoặc</span>
+                <a href="/Dang-ky" title="Đăng ký">Đăng ký</a>
+            </h1>
+            <div class="blockcontent">
+                <div class="loginsocial">
+                    <h3 style="border:none;">Đăng nhập bằng</h3>
+                    <div class="buttom">
+                        <div><a href="javascript:" class="btn_face" onclick="checkLoginState();"></a></div>
+                    </div>
+                </div>
+                <h3 style="border:none;">Đăng nhập bằng tài khoản Book Shop</h3>
+                <div class="loginform">
+
+                    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                    {
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="idemail">Email</label> <span class="Required">*</span>:
+                            </div>
+                            <input type="text" name="email" id="idemail" onfocus="showhelp(1)" value="" autocomplete="off" onsubmit="return ValidateForm(CheckForm);">
+                            <span class="help" id="help1">Nhập email của bạn</span>
+                        </div>
+                        <div class="field">
+                            <div class="textlabel">
+                                <label for="idpassword">Mật khẩu</label> <span class="Required">*</span>:
+                            </div>
+                            <input id="idpassword" autocomplete="off" onfocus="showhelp(2)" type="password" name="pass" onsubmit="return ValidateForm(CheckForm);">
+                            <span class="help" id="help2">Nhập mật khẩu của bạn</span>
+                        </div>
+                        <div class="field">
+                            <div class="textlabel"></div>
+                            <a href="/users/forgotpasswords/index.html" title="Quên mật khẩu?">Quên mật khẩu?</a>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="field">
+                            <div class="textlabel">
+                                &nbsp;
+                            </div>
+                            <input type="hidden" name="redirect" value="">
+                            <input type="submit" align="absmiddle" class="loginbuton" value="Đăng nhập">
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="/Dang-ky" title="Đăng ký" class="link_register">Tạo tài khoản</a>
+                        </div>
+                    }
+
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        @section Login{
+            <script src="~/Assets/Client/js/Controller/Login.js"></script>
+        }
+    </div>
+</div>

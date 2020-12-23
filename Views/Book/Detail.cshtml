@@ -1,0 +1,384 @@
+﻿
+@{
+    var book = (BookShop.Models.EF.Book)ViewBag.Book;
+    ViewBag.Title = book.Name;
+    Layout = "~/Views/Shared/LayoutDetail.cshtml";
+    var CateDetail = (BookShop.Models.EF.Category)ViewBag.CategoryDetail;
+    var bookCategory = (BookShop.Models.EF.BookCategory)ViewBag.BookDetail;
+
+    var asAuthor = (List<BookShop.Models.EF.Book>)ViewBag.AsAuthor;
+    var asCate = (List<BookShop.Models.EF.Book>)ViewBag.AsCate;
+    var session = (BookShop.Models.EF.User)Session[BookShop.Controllers.LoginController.userSession];
+    var feedback = ViewBag.Feedback as List<BookShop.Models.DTO.FeedbackDTO>;
+}
+
+
+
+<div id="home">
+    <div class="container">
+        <div class="Pathway">
+            <ul>
+                <li><a href="/" title="Trang chủ">Trang chủ</a></li>
+                <li><a href="@CateDetail.MetaTitle" title="@CateDetail.Name">@CateDetail.Name</a></li>
+                <li><a href="@bookCategory.MetaTitle" title="@bookCategory.Name">@bookCategory.Name</a></li>
+                <li>@book.Name</li>
+            </ul>
+        </div>
+        <div class="sortable">
+            <div class="Product_view_contener">
+                <div class="sortleft">
+                    <div class="product_info">
+                        <h1>@book.Name</h1>
+                        <div class="group">
+                            <div class="viewfield">
+                                <span>
+                                    Tác giả:
+                                    <a href="/Tac-gia/@book.Author" title="@book.Author">@book.Author</a>
+                                </span>
+                                <span>
+                                    Phát hành:
+                                    <a href="/Nha-phat-hanh/@book.Released" title="@book.Released">@book.Released</a>
+                                </span>
+                                <span>
+                                    Hình thức:
+                                    <a title="@book.Form">@book.Form</a>
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="prices_contener">
+                            <div class="prices">
+                                <div class="salePrice">
+                                    <span id="saleprice">@book.Price.Value.ToString("N0") ₫</span>
+                                </div>
+                                <div class="rootprice">
+                                    Giá bìa:
+                                    <span>@book.PromotionPrice.Value.ToString("N0") ₫</span>
+                                </div>
+                            </div>
+                            <div class="DatTruoc">
+                                <a href="/them-gio-hang?BookID=@book.ID&quantity=1" class="goshop">Mua ngay</a>
+                            </div>
+                        </div>
+                        <div class="intro">
+                            <p>
+                                <i class="fa fa-check"></i>
+                                <span style="font-size:14px;">Bọc Plastic miễn phí</span>
+                            </p>
+                            <p>
+                                <i class="fa fa-check"></i>
+                                <span style="font-size:14px">
+                                    Giao hàng miễn phí trong nội thành TP. HCM với đơn hàng&nbsp;
+                                    <span style="color:#33cc33;"><strong>≥ 150.000 đ </strong></span>
+                                </span>
+                            </p>
+
+                            <p>
+                                <i class="fa fa-check"></i>
+                                <span style="font-size:14px">
+                                    Giao hàng miễn phí toàn quốc với đơn hàng
+                                    <span style="color:#33cc33;"><strong>≥ 250.000 đ</strong></span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="image_contener">
+                    <div class="main_image">
+                        <img src="@book.Image" alt="@book.Name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <h3>Giới thiệu sách</h3>
+                <div class="intro1 cc" id="contentID">
+                    <p style="text-align:justify;">
+                        <span style="color:#ff0000;">
+                            <span style="font-size:16px;">
+                                <strong>@book.Name</strong>
+                            </span>
+                        </span>
+                    </p>
+
+                    <p style="text-align:justify;">
+                        @Html.Raw(book.Description)
+                    </p>
+                </div>
+
+                <div class="viewmore" id="ViewMore" style="display:block;">
+                    <span>
+                        Xem thêm nội dung
+                        <i class="fa fa-sort-desc"></i>
+                    </span>
+                </div>
+
+                <script src="~/Assets/Client/js/script.js"></script>
+            </div>
+            <div class="block" id="module_ProductFieds">
+                <a name="fieldlist"></a>
+                <h3>Thông tin chi tiết</h3>
+                <table class="fields" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody>
+                        <tr class="field_view_contenner row0">
+                            <td class="title"><a href="/Tat-ca-tac-gia" title="Tác giả">Tác Giả</a></td>
+                            <td class="values"><a href="/Tac-gia/@book.Author" title="Phil Knight">@book.Author</a></td>
+                        </tr>
+
+                        <tr class="field_view_contenner row1">
+                            <td class="title"><a href="/Nha-phat-hanh">Phát hành</a></td>
+                            <td class="values"><a href="/Nha-phat-hanh/@book.Released">@book.Released</a></td>
+                        </tr>
+
+                        <tr class="field_view_contenner row0">
+                            <td class="title">NXB</td>
+                            <td class="values">@book.NXB</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row1">
+                            <td class="title">Lượt mua</td>
+                            <td class="values">@book.Buys</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row0">
+                            <td class="title">Trọng lượng</td>
+                            <td class="values">@book.Weight</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row1">
+                            <td class="title">Lượt xem</td>
+                            <td class="values">@book.ViewCount</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row0">
+                            <td class="title">Ngày phát hành</td>
+                            <td class="values">@book.PublishDate.Value.ToString("dd/MM/yyyy")</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row1">
+                            <td class="title">Danh mục</td>
+                            <td class="values"><a href="The-loai/@book.MetaTitle-@book.CategoryID" title="@bookCategory.Name">@bookCategory.Name</a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="DatTruoc">
+                    <a href="/them-gio-hang?BookID=@book.ID&quantity=1" class="BuyNow"><span>Mua ngay</span></a>
+                </div>
+            </div>
+
+            @*Lấy ra sách cùng tác giả*@
+            @if (asAuthor.Count > 0)
+            {
+                <div class="block">
+                    <h3>Sách cùng tác giả</h3>
+                    <div class="blockcontent">
+                        <div style="position:relative; padding:0 0; overflow:hidden; height:320px;">
+                            @foreach (var item in asAuthor)
+                            {
+                                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                int sale = (int)((1 - item.Price / item.PromotionPrice) * 100);
+                                <div class="product_contener">
+                                    <div class="products">
+                                        <div class="image">
+                                            <a href="@url">
+                                                <img src="@item.Image" />
+                                            </a>
+                                            <span class="saleprice">-@sale%</span>
+                                        </div>
+                                        <div class="productname">
+                                            <a href="@url" title="@item.Name">@item.Name</a>
+                                        </div>
+                                        <div class="fields"> <span><a href="">@item.Author</a></span></div>
+
+                                        <div class="prices">@item.Price.Value.ToString("N0") ₫</div>
+                                        <div class="promotionPrice">@item.PromotionPrice.Value.ToString("N0") ₫</div>
+                                    </div>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+            @*Lấy ra sách cùng thể loại*@
+            @if (asCate.Count > 0)
+            {
+                <div class="block">
+                    <h3>Có thể bạn quan tâm</h3>
+                    <div class="blockcontent">
+                        <div style="position:relative; padding:0 0; overflow:hidden; height:320px;">
+                            @foreach (var item in asCate)
+                            {
+                                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                int sale = (int)((1 - item.Price / item.PromotionPrice) * 100);
+                                <div class="product_contener">
+                                    <div class="products">
+                                        <div class="image">
+                                            <a href="@url">
+                                                <img src="@item.Image" />
+                                            </a>
+                                            <span class="saleprice">-@sale%</span>
+                                        </div>
+                                        <div class="productname">
+                                            <a href="@url" title="@item.Name">@item.Name</a>
+                                        </div>
+                                        <div class="fields"> <span><a href="">@item.Author</a></span></div>
+
+                                        <div class="prices">@item.Price.Value.ToString("N0") ₫</div>
+                                        <div class="promotionPrice">@item.PromotionPrice.Value.ToString("N0") ₫</div>
+                                    </div>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="block" id="reviews">
+                <h3>Đánh giá sách (@feedback.Count)</h3>
+                <div class="blockcontent">
+
+                    @if (session != null)
+                    {
+                        <div class="col-md-12">
+                            <form action="#">
+                                <div class="row">
+                                    <h5 style="margin-left: 15px;">Điểm đánh giá</h5>
+                                    <div class="col-md-3" style="color: gold;">
+                                        <input type="hidden" id="point_review" class="rating" data-filled="fa fa-star fa-3x" data-empty="fa fa-star-o fa-3x" data-start="5" data-stop="10" />
+                                    </div>
+                                    <div style="padding-top:15px;">
+                                        <span id="rating_description"></span>
+                                        <input type="hidden" id="Rating_Description" name="Rating_Description" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h5 style="margin-left: 15px;">Đánh giá của bạn:</h5>
+                                </div>
+                                <textarea name="" placeholder="Nhập đánh giá của bạn..." id="text_review"></textarea>
+                                <button type="button" class="btn btn-default pull-right" id="btn-review" data-userid="@session.ID">
+                                    Gửi đánh giá
+                                </button>
+                            </form>
+                        </div>
+                    }
+
+                    @foreach (var item in feedback)
+                    {
+                        <div class="col-md-12 review">
+                            <ul>
+                                <li><a href=""><i class="fa fa-user"></i>@item.User_Name</a></li>
+                                <li><a href=""><i class="fa fa-clock-o"></i>@item.CreatedDate.Value.ToString("hh:mm")</a></li>
+                                <li><a href=""><i class="fa fa-calendar-o"></i>@item.CreatedDate.Value.ToString("dd/MM/yyyy")</a></li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-xs-2" style="color: gold; font-size:5px">
+                                    <input type="hidden" value="@item.Rating" class="rating" data-filled="fa fa-star fa-3x" data-empty="fa fa-star-o fa-3x" data-start="5" data-stop="10" disabled />
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="rating_text"> @item.Rating_Description</span>
+                                </div>
+                            </div>
+                            <div class="review-content">
+                                <p>
+                                    @item.Content
+                                </p>
+                            </div>
+
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section jsRender{
+    <script src="~/Assets/Client/js/rating.js"></script>
+
+    <script>
+        $('.rating').on('change', function () {
+            // $(this).next('.label').text($(this).val());
+            // alert($(this).val());
+            switch ($(this).val())
+            {
+                case "10":
+                    $('#rating_description').text("Rất hay!");
+                    break;
+                case "9":
+                    $('#rating_description').text("Hay!");
+                    break;
+                case "8":
+                    $('#rating_description').text("Bình thường!");
+                    break;
+                case "7":
+                    $('#rating_description').text("Không hay!");
+                    break;
+                default:
+                    $('#rating_description').text("Dở!");
+                    break;
+            }
+            var rating_description = $('#rating_description').text();
+            $('#point_review').val($(this).val());
+            $('#Rating_Description').val(rating_description);
+
+
+        });
+
+        $(document).ready(function () {
+            $("#btn-review").click(function () {
+            var user_id = $(this).data('userid');
+            var book_id = @book.ID;
+            var content = $('#text_review').val();
+            var rating = $('#point_review').val();
+            var rating_description = $('#Rating_Description').val();
+
+                var json_review = [];
+                json_review.push({
+                    User_ID: user_id,
+                    Content: content,
+                    Rating: rating,
+                    Rating_Description: rating_description,
+                    Book_ID: book_id
+                });
+
+                console.log(json_review);
+            $.ajax({
+                url: '/Book/addReview',
+                data: { json_review: JSON.stringify(json_review) },
+                type: 'POST',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.status == true) {
+                        var url = "@book.MetaTitle" + "-" + book_id;
+                        window.location.href = "/chi-tiet/" + url;
+                        PNotify.success({
+                            title: 'THÔNG BÁO!!',
+                            text: 'Đánh giá sách thành công.'
+                        });
+                    } else {
+                            PNotify.error({
+                            title: 'THÔNG BÁO!!',
+                            text: 'Đã có lỗi xảy ra, bạn vui lòng đánh giá sản phẩm vào thời gian tới.'
+                        });
+                    }
+
+
+                }
+            });
+            });
+        });
+    </script>
+}

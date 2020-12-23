@@ -1,0 +1,172 @@
+﻿
+@{
+    var book = (BookShop.Models.EF.Book)ViewBag.Book;
+    ViewBag.Title = book.Name;
+    Layout = "~/Views/Shared/LayoutDetail.cshtml";
+    var CateDetail = (BookShop.Models.EF.Category)ViewBag.CategoryDetail;
+    var bookCategory = (BookShop.Models.EF.BookCategory)ViewBag.BookDetail;
+}
+
+
+
+<div id="home">
+    <div class="container">
+        <div class="Pathway">
+            <ul>
+                <li><a href="/" title="Trang chủ">Trang chủ</a></li>
+                <li><a href="@CateDetail.MetaTitle" title="@CateDetail.Name">@CateDetail.Name</a></li>
+                <li><a href="@bookCategory.MetaTitle" title="@bookCategory.Name">@bookCategory.Name</a></li>
+                <li>@book.Name</li>
+            </ul>
+        </div>
+        <div class="sortable">
+            <div class="Product_view_contener">
+                <div class="sortleft">
+                    <div class="product_info">
+                        <h1>@book.Name</h1>
+                        <div class="group">
+                            <div class="viewfield">
+                                <span>
+                                    Tác giả:
+                                    <a href="#" title="@book.Author">@book.Author</a>
+                                </span>
+                                <span>
+                                    Phát hành:
+                                    <a href="#" title="@book.Released">@book.Released</a>
+                                </span>
+                                <span>
+                                    Hình thức:
+                                    <a href="#">@book.Form</a>
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="prices_contener">
+                            <div class="prices">
+                                <div class="salePrice">
+                                    <span id="saleprice">@book.Price.Value.ToString("N0") ₫</span>
+                                </div>
+                                <div class="rootprice">
+                                    Giá bìa:
+                                    <span>@book.PromotionPrice.Value.ToString("N0") ₫</span>
+                                </div>
+                            </div>
+                            <div class="DatTruoc">
+                                <a href="/them-gio-hang?BookID=@book.ID&quantity=1" class="booksale">Đặt trước</a>
+                            </div>
+                        </div>
+                        <div class="intro">
+                            <p>
+                                <i class="fa fa-check"></i>
+                                <span style="font-size:14px;">Bọc Plastic miễn phí</span>
+                            </p>
+                            <p>
+                                <i class="fa fa-check"></i>
+                                <span style="font-size:14px">
+                                    Giao hàng miễn phí trong nội thành TP. HCM với đơn hàng&nbsp;
+                                    <span style="color:#33cc33;"><strong>≥ 150.000 đ </strong></span>
+                                </span>
+                            </p>
+
+                            <p>
+                                <i class="fa fa-check"></i>
+                                <span style="font-size:14px">
+                                    Giao hàng miễn phí toàn quốc với đơn hàng
+                                    <span style="color:#33cc33;"><strong>≥ 250.000 đ</strong></span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="image_contener">
+                    <div class="main_image">
+                        <img src="@book.Image" alt="@book.Name" data-id="@book.ID">
+                    </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <h3>Giới thiệu sách</h3>
+                <div class="intro1 cc" id="contentID">
+                    <p style="text-align:justify;">
+                        <span style="color:#ff0000;">
+                            <span style="font-size:16px;">
+                                <strong>@book.Name</strong>
+                            </span>
+                        </span>
+                    </p>
+
+                    <p style="text-align:justify;">
+                        @Html.Raw(book.Description)
+                    </p>
+                </div>
+
+                <div class="viewmore" id="ViewMore" style="display:block;">
+                    <span>
+                        Xem thêm nội dung
+                        <i class="fa fa-sort-desc"></i>
+                    </span>
+                </div>
+
+                <script src="~/Assets/Client/js/script.js"></script>
+            </div>
+            <div class="block" id="module_ProductFieds">
+                <a name="fieldlist"></a>
+                <h3>Thông tin chi tiết</h3>
+                <table class="fields" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody>
+                        <tr class="field_view_contenner row0">
+                            <td class="title"><a href="#" title="Tác giả">Tác Giả</a></td>
+                            <td class="values"><a href="#" title="Phil Knight">@book.Author</a></td>
+                        </tr>
+
+                        <tr class="field_view_contenner row1">
+                            <td class="title"><a href="#" title="Phát hành">Phát hành</a></td>
+                            <td class="values"><a href="#" title="NXB Trẻ">@book.Released</a></td>
+                        </tr>
+
+                        <tr class="field_view_contenner row0">
+                            <td class="title"><a href="#" title="NXB Trẻ">NXB</a></td>
+                            <td class="values">@book.NXB</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row1">
+                            <td class="title">Lượt mua</td>
+                            <td class="values">@book.Buys</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row0">
+                            <td class="title">Trọng lượng</td>
+                            <td class="values">@book.Weight</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row1">
+                            <td class="title">Lượt xem</td>
+                            <td class="values">@book.ViewCount</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row0">
+                            <td class="title">Ngày phát hành</td>
+                            <td class="values">@book.PublishDate.ToString("dd/MM/yyyy")</td>
+                        </tr>
+
+                        <tr class="field_view_contenner row1">
+                            <td class="title">Danh mục</td>
+                            <td class="values"><a href="@bookCategory.MetaTitle" title="@bookCategory.Name">@bookCategory.Name</a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="DatTruoc">
+                    <a href="/them-gio-hang?BookID=@book.ID&quantity=1" class="bookNow"><span>Đặt trước</span></a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+

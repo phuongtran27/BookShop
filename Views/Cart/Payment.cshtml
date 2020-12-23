@@ -1,0 +1,107 @@
+﻿@model List<BookShop.Models.DTO.CartItem>
+@{
+    ViewBag.Title = "Thanh toán giỏ hàng";
+    Layout = "~/Views/Shared/LayoutDetail.cshtml";
+    var sum = new long();
+    var session = (BookShop.Models.EF.User)Session["userSession"];
+    int count = 0;
+    long vat = 0, km = 0;
+}
+@section cartSection{
+    <script src="~/Assets/Client/js/Controller/End_Payment.js"></script>
+}
+<div class="container">
+    <div class="w3-main">
+        <!-- Main -->
+        <div class="about-bottom">
+            <div class="w3l_about_bottom_left">
+
+                <div class="book-form b2">
+                    <h3 class="cat-w3l">Sách của bạn</h3>
+                    <div class="agile-form">
+                        <div class="clear"></div>
+                        @foreach (var item in Model)
+                        {
+                            <div class="Book">
+                                <div class="images">
+                                    <img src="@item.Book.Image" />
+                                </div>
+                                <div class="Book-Name" data-id="@item.Book.ID">
+                                    <h3>@item.Book.Name</h3>
+                                </div>
+
+                                <div class="Name-Author">
+                                    <a href="#">@item.Book.Author</a>
+                                </div>
+                            </div>
+                            sum += (long)(item.Book.Price.GetValueOrDefault(0) * item.Quantity);
+                        }
+                        @if (sum != 0)
+                        {
+                            vat = (long)(sum * 0.1);
+                            km = (long)(sum * 0.15);
+                            sum = sum - km + vat;
+                        }
+                        <div class="clear"> </div>
+                    </div>
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-5">
+                        Thuế VAT (10%): <span style="float: right">@vat.ToString("N0") ₫</span>
+                    </div>
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-5">
+                        Khuyến mãi 15%: <span style="float: right">@km.ToString("N0") ₫</span>
+                    </div>
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-5">
+                        <span style="font-size: 20px;">Tổng tiền:</span> <span style="color: red; font-size: 20px; float: right">@sum.ToString("N0") ₫</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="w3l_about_bottom_right two">
+                <div class="book-form">
+                    <h2 class="tittle">Thông tin khách hàng</h2>
+                    @*<form action="#" method="post" class="creditly-card-form agileinfo_form">*@
+                    @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                    {
+                        <input type="hidden" name="User_ID" value="@session.ID" />
+                        <input type="hidden" name="TotalMoney" value="@sum" />
+                        <input type="hidden" name="TotalQuantity" value="@count" />
+                        <section class="creditly-wrapper wthree, w3_agileits_wrapper">
+                            <div class="form-date-w3-agileits">
+                                <label> Họ và tên</label>
+                                <input type="text" name="ShipName" placeholder="Họ và tên" value="@session.Name" required>
+                            </div>
+                            <div class="form-date-w3-agileits">
+                                <label>Email :</label>
+                                <input type="email" name="ShipEmail" placeholder="Email" value="@session.Email" required>
+                            </div>
+                            <div class="form-date-w3-agileits">
+                                <label class="control-label">Số điện thoại</label>
+                                <input class="number credit-card-number form-control" value="@session.Phone" type="text" name="ShipMobile"
+                                       inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
+                                       placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;">
+
+                            </div>
+                            <div class="form-date-w3-agileits">
+                                <label> Địa chỉ giao hàng:</label>
+                                <input type="text" name="ShipAdress" value="@session.Adress" required placeholder="Nhập địa chỉ của bạn">
+                            </div>
+
+                            <div class="make wow shake">
+                                <input type="submit" name="submit" value="Thanh toán" id="End-Payment">
+                            </div>
+                        </section>
+                    }
+
+
+
+                    @*</form>*@
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

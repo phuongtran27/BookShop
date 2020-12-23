@@ -1,0 +1,49 @@
+﻿@{
+    var category = (List<BookShop.Models.EF.Category>)ViewBag.Category;
+    var bookcategory = (List<BookShop.Models.EF.BookCategory>)ViewBag.BookCategory;
+}
+
+<div class="boxleft">
+    <div class="titboxl">
+        <i class="fa fa-bars fa-x2 fa-lg" aria-hidden="true"></i>
+        <span>Danh mục sản phẩm</span>
+    </div>
+    <div class="ctboxleft">
+        <ul class="mnboxl">
+            @foreach (var item in category)
+            {
+                <li>
+                    <a href="@item.MetaTitle">@item.Name</a>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <ul class="mnboxl_1">
+
+                        @foreach (var itemBook in bookcategory)
+                        {
+                            if (item.ID == itemBook.ParentID)
+                            {
+                                if (itemBook.ID == 2)
+                                {
+                                    <li><a href="/sach-moi">@itemBook.Name</a></li>
+                                }
+                                else if (itemBook.ID == 3)
+                                {
+                                    <li><a href="/sap-phat-hanh">@itemBook.Name</a></li>
+                                }
+                                else if (itemBook.ID == 1)
+                                {
+                                    <li><a href="/sach-ban-chay">@itemBook.Name</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/the-loai/@itemBook.MetaTitle-@itemBook.ID">@itemBook.Name</a></li>
+                                }
+                            }
+
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+

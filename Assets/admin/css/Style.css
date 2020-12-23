@@ -1,0 +1,24 @@
+﻿body {
+}
+
+
+.btn-add{
+   margin:10px;
+       
+}
+
+.btn-add a{
+    padding-left:3px;
+}
+
+.btn-add a i{
+    padding-right:3px;
+}
+
+a.btn-active:hover{
+    cursor:pointer;
+}
+
+.text-panel {
+    font-size: 25px
+}

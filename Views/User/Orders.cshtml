@@ -1,0 +1,170 @@
+﻿@using BookShop.Models.EF;
+@{
+    ViewBag.Title = "Đơn hàng của bạn";
+    Layout = "~/Views/Shared/LayoutDetail.cshtml";
+    var Orders = ViewBag.Orders as List<Order>;
+}
+
+<h2 class="text-center">Đơn hàng của bạn</h2>
+<div class="container">
+
+    @if (Orders.Count > 0)
+    {
+
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th class="text-center">Ngày đặt hàng</th>
+                    <th>Số lượng</th>
+                    <th class="text-center">Thành tiền</th>
+                    <th>Trạng thái </th>
+                    <th width=""></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Orders)
+                {
+
+                    <tr>
+                        <td data-th="Subtotal" class="text-center">@item.CreateDate.Value.ToString("dd/MM/yyyy")</td>
+                        <td data-th="Quantity">
+                            <div class="form-control text-center">
+                                @item.TotalQuantity
+                            </div>
+                        </td>
+                        <td data-th="Subtotal" class="text-center">@item.TotalMoney.Value.ToString("N0") ₫</td>
+
+                        <td class="actions" data-th="">
+                            <div class="btn-Edit">
+                                @if (item.Status == 1)
+                                {
+                                    <span class="label label-warning">Chờ xác nhận</span>
+                                }
+                                else if (item.Status == 2)
+                                {
+                                    <span class="label label-info">Đang vận chuyển</span>
+                                }
+                            </div>
+                        </td>
+                        @if (item.Status == 1)
+                        {
+                            <td class="actions" data-th="">
+                                <div class="btn-Edit" title="Chi tiết đơn hàng">
+                                    <a class="btn btn-info btn-sm" href="/User/OrderDetail/@item.ID">
+                                        <i class="fa fa-edit"></i>Xem chi tiết
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="actions" data-th="">
+                                <div class="btn-Edit btnCancer" title="Hủy đơn hàng" data-id="@item.ID">
+                                    <a class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash-o"></i> Hủy đơn
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="actions" data-th="">
+                                <div class="btn-Edit" title="xuất hóa đơn">
+                                    <a class="btn btn-warning btn-sm" href="/User/PrintBill/@item.ID" target="_blank">
+                                        <i class="fa fa-print"></i>Xuất hóa đơn
+                                    </a>
+                                </div>
+                            </td>
+                        }
+                        else if (item.Status == 2)
+                        {
+                            <td class="actions" data-th="">
+                                <div class="btn-Edit" title="Chi tiết đơn hàng">
+                                    <a class="btn btn-info btn-sm" href="/User/OrderDetail/@item.ID">
+                                        <i class="fa fa-edit"></i>Xem chi tiết
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="actions" data-th="">
+                                <div class="btn-Edit" title="xuất hóa đơn">
+                                    <a class="btn btn-warning btn-sm" href="/User/PrintBill/@item.ID" target="_blank">
+                                        <i class="fa fa-print"></i>Xuất hóa đơn
+                                    </a>
+                                </div>
+                            </td>
+                        }
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="container">
+            <div class="col-lg-12 alert alert-danger text-center">
+                <span> Bạn chưa có đơn hàng nào</span>
+            </div>
+            <div class="col-lg-5"></div>
+            <div class="col-lg-6">
+                <a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section jsRender{
+
+    <script>
+        $(function () {
+            $('.btnCancer').off('click').on('click', function () {
+                const notice = PNotify.notice({
+                    title: 'Thông báo',
+                    text: 'Bạn thật sự muốn hủy đơn hàng này?',
+                    icon: 'fa fa-question-circle',
+                    width: '360px',
+                    minHeight: '110px',
+                    hide: false,
+                    closer: false,
+                    sticker: false,
+                    destroy: true,
+                    stack: new PNotify.Stack({
+                        dir1: 'down',
+                        modal: true,
+                        firstpos1: 25,
+                        overlayClose: false
+                    }),
+                    modules: new Map([
+                        ...PNotify.defaultModules,
+                        [PNotifyConfirm, {
+                            confirm: true
+                        }]
+                    ])
+                });
+
+                notice.on('pnotify:confirm', () =>
+                    $.ajax({
+                        data: { Order_ID: $(this).data('id') },
+                        url: '/User/CancerOrder',
+                        dataType: 'Json',
+                        type: 'POST',
+                        success: function (res) {
+                            if (res.status == true) {
+                                window.location.href = "/User/Orders";
+                                PNotify.success({
+                                    title: 'THÔNG BÁO!!',
+                                    text: 'Hủy đơn hàng thành công.'
+                                });
+                            } else {
+                                PNotify.error({
+                                    title: 'THÔNG BÁO!!',
+                                    text: 'Hủy đơn hàng KHÔNG thành công.'
+                                });
+                            }
+                        }
+                    })
+
+                );
+
+
+            });
+        });
+    </script>
+
+}
+

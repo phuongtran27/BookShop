@@ -1,0 +1,89 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="~/Assets/admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <link href="~/Assets/Client/css/Notify/BrightTheme.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotify.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotifyBootstrap3.css" rel="stylesheet" />
+    <link href="~/Assets/Client/css/Notify/PNotifyConfirm.css" rel="stylesheet" />
+    <script src="~/Assets/Client/js/Notify/PNotify.js"></script>
+    <script src="~/Assets/Client/js/Notify/PNotifyBootstrap3.js"></script>
+    <script src="~/Assets/Client/js/Notify/PNotifyConfirm.js"></script>
+
+    <link href="/Assets/Client/css/jquery-ui.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Assets/admin/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="~/Assets/admin/css/Style.css" rel="stylesheet" />
+    <link href="~/Assets/admin/css/Create/demo.css" rel="stylesheet" />
+    <link href="~/Assets/admin/css/Create/style.css" rel="stylesheet" />
+    <link href="~/Assets/admin/datepicker/css/datepicker.css" rel="stylesheet" />
+
+    <!-- Custom Fonts -->
+    @*<link href="~/Assets/admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*@
+    @*<link href="~/Assets/admin/css/font-awesome.min.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        @RenderPage("_Navigation.cshtml")
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <!--Dùng bootrap tạo thông báo người dùng-->
+            <!--Gọi phương thức SetAlert -->
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div id="AlertBox" class="alert @TempData["AlertType"] hide" style="text-align:center;">
+                    @TempData["AlertMessage"]
+                </div>
+            }
+
+            @RenderBody()
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/Assets/admin/vendor/jquery/jquery.min.js"></script>
+
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Assets/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Assets/admin/datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script src="/Assets/Client/js/jquery-ui.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Assets/admin/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Assets/admin/js/ckfinder/ckfinder.js"></script>
+    <script src="~/Assets/admin/js/ckeditor/ckeditor.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Assets/admin/dist/js/sb-admin-2.js"></script>
+    <script src="~/Assets/admin/dist/js/AlertBox.js"></script>
+
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>
